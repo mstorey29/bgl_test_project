@@ -1,0 +1,53 @@
+﻿@using BGLGroup_MS.Models
+@model GitHubUserViewModel
+
+@if (!String.IsNullOrEmpty(@ViewBag.ErrorMessage))
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="pb-2 pt-2">Results</h2>
+        </div>
+        <div class="col-md-12">
+            <p><strong>@Html.LabelFor(model => model.name) : </strong> @Html.DisplayFor(model => model.name)</p>
+        </div>
+        <div class="col-md-12">
+            <p><strong>@Html.LabelFor(model => model.location) : </strong> @Html.DisplayFor(model => model.location)</p>
+        </div>
+        <div class="col-md-12">
+            <p>
+                <strong> @Html.LabelFor(model => model.avatarUrl) :</strong>
+                @if (!String.IsNullOrEmpty(Model.avatarUrl))
+                {
+                    <img src="@Html.DisplayFor(model =>model.avatarUrl)" class="img-avatar img-thumbnail" />
+                }
+            </p>
+        </div>
+    </div>
+
+    <p><strong>@Html.LabelFor(model => model.userRepos):</strong></p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.LabelFor(model => model.userRepos[0].name)</th>
+                <th scope="col">@Html.LabelFor(model => model.userRepos[0].repoUrl)</th>
+                <th scope="col">@Html.LabelFor(model => model.userRepos[0].starGazerCount)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repo in Model.userRepos)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(repoItem => repo.name)</td>
+                    <td>@Html.DisplayFor(repoItem => repo.repoUrl)</td>
+                    <td>@Html.DisplayFor(repoItem => repo.starGazerCount)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,27 @@
+﻿@using BGLGroup_MS.Models
+@model GitHubUserInputModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Ajax.BeginForm("SubmitForm", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "results" }))
+{
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.UserName)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.UserName, new { maxlength = 50 })
+
+            <input id="btnSave" type="submit" value="Submit" />
+        </div>
+        <div class="col-md-12">
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+          
+        </div>
+    </div>
+}
+
+<div id="results">
+</div>
